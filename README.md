@@ -31,11 +31,11 @@ Follow these steps to install and set up Poll.ayZ on your development environmen
 
     ### Windows:
 
-    1. **Open the hosts file:** Navigate to the hosts file located at `C:\Windows\System32\drivers\etc\hosts`.
+    2.1. **Open the hosts file:** Navigate to the hosts file located at `C:\Windows\System32\drivers\etc\hosts`.
     
-    2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
+    2.2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
     
-    3. **Add a new line:** Add the following line to define your local domain:
+    2.3. **Add a new line:** Add the following line to define your local domain:
     
         ```
         127.0.0.1 myproject.local
@@ -43,9 +43,9 @@ Follow these steps to install and set up Poll.ayZ on your development environmen
     
         Replace `myproject.local` with the desired domain name for your project.
     
-    4. **Save the hosts file:** After adding the new line, save the hosts file.
+    2.4. **Save the hosts file:** After adding the new line, save the hosts file.
     
-    5. **Flush DNS cache (optional):** To ensure immediate effect, flush the DNS cache by opening Command Prompt as administrator and running:
+    2.5. **Flush DNS cache (optional):** To ensure immediate effect, flush the DNS cache by opening Command Prompt as administrator and running:
     
         ```
         ipconfig /flushdns
@@ -55,11 +55,11 @@ Follow these steps to install and set up Poll.ayZ on your development environmen
 
     For macOS and Linux distributions, you can achieve the same result by following similar steps. Here's a general guide:
 
-    1. **Open the hosts file:** Navigate to the hosts file located at `/etc/hosts`.
+    2.1. **Open the hosts file:** Navigate to the hosts file located at `/etc/hosts`.
     
-    2. **Edit the hosts file:** Open the hosts file with a text editor with administrative privileges.
+    2.2. **Edit the hosts file:** Open the hosts file with a text editor with administrative privileges.
     
-    3. **Add a new line:** Add the following line to define your local domain:
+    2.3. **Add a new line:** Add the following line to define your local domain:
     
         ```
         127.0.0.1 myproject.local
@@ -67,17 +67,17 @@ Follow these steps to install and set up Poll.ayZ on your development environmen
     
         Replace `myproject.local` with the desired domain name for your project.
     
-    4. **Save the hosts file:** After adding the new line, save the hosts file.
+    2.4. **Save the hosts file:** After adding the new line, save the hosts file.
 
 3. **Adding Virtual Host on your Apache Server**
 
     ### WAMP:
 
-    1. **Open the httpd-vhosts.conf file:** Navigate to the httpd-vhosts.conf file located at `C:\wamp64\bin\apache\apache2.4.58\conf\extra\httpd-vhosts.conf`.
+    3.1. **Open the httpd-vhosts.conf file:** Navigate to the httpd-vhosts.conf file located at `C:\wamp64\bin\apache\apache2.4.58\conf\extra\httpd-vhosts.conf`.
     
-    2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
+    3.2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
     
-    3. **Adapt and add the following configuration:** Adapt the following configuration and add it to tell your Apache server where to point:
+    3.3. **Adapt and add the following configuration:** Adapt the following configuration and add it to tell your Apache server where to point:
     
     ```
     <VirtualHost *:80>
@@ -88,11 +88,11 @@ Follow these steps to install and set up Poll.ayZ on your development environmen
 
     ### XAMPP:
 
-    1. **Open the httpd-vhosts.conf file:** Navigate to the httpd-vhosts.conf file located at `C:\xampp\apache\conf\extra\httpd-vhosts.conf`.
+    3.1. **Open the httpd-vhosts.conf file:** Navigate to the httpd-vhosts.conf file located at `C:\xampp\apache\conf\extra\httpd-vhosts.conf`.
     
-    2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
+    3.2. **Edit the hosts file:** Open the hosts file with a text editor that has administrative privileges.
     
-    3. **Adapt and add the following configuration:** Adapt the following configuration and add it to tell your Apache server where to point:
+    3.3. **Adapt and add the following configuration:** Adapt the following configuration and add it to tell your Apache server where to point:
     
     ```
     <VirtualHost *:80>
