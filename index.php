@@ -1,9 +1,12 @@
 <?php 
-require_once 'templates/header.php';
-require_once 'lib/poll.php';
+  require_once 'lib/required_files.php';
 
-$polls = getPolls($pdo);
-?>
+  require_once 'lib/poll.php';
+
+  $polls = getPolls($pdo, HOME_LIMIT_POLLS);
+
+  require_once 'templates/header.php';
+  ?>
 
 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
   <div class="col-10 col-sm-8 col-lg-6">
