@@ -1,51 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr-FR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Poll.ayZ</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-  
-  <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-          <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-      </div>
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Features</a></li>
-        <li><a href="#" class="nav-link px-2">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
-      </ul>
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-      </div>
-    </header>
+<?php 
+require_once 'templates/header.php';
+require_once 'lib/poll.php';
 
-    <main>
+$polls = getPolls($pdo);
+?>
 
-      <h1>TEST</h1>
-
-    </main>
-
-    <footer class="py-3 my-4">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-      </ul>
-      <p class="text-center text-body-secondary">© 2024 Company, Inc</p>
-    </footer>
+<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+  <div class="col-10 col-sm-8 col-lg-6">
+    <img src="<?=PATH_ASSETS_IMAGES?>logo-pollayz.png" class="d-block mx-lg-auto img-fluid" alt="Logo Poll.ayZ" width="500" height="500" loading="lazy">
   </div>
+  <div class="col-lg-6">
+    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Votez sur des sujets de l'actualité IT</h1>
+    <p class="lead">Votit : Là où la communauté tech s'exprime. De la préférence entre frameworks front-end aux débats sur les meilleures pratiques DevOps, nous vous offrons une plateforme pour créer, participer et analyser des sondages spécifiquement centrés sur le monde du développement, de l'IT et du DevOps. Rejoignez-nous, partagez vos opinions et restez à jour avec les tendances de notre industrie !</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Voir tous les sondages</button>
+    </div>
+  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+<div class="row text-center">
+  <h2>Les derniers sondages :</h2>
+
+  <?php foreach($polls as $poll) {
+    require 'templates/poll_part.php';
+  }?>
+</div>
+
+<?php require_once 'templates/footer.php'; ?>
