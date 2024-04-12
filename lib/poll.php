@@ -51,3 +51,34 @@ function getPollTotalUsers(PDO $pdo, INT $id): INT {
     return 0;
   }
 }
+
+function getPollItems(PDO $pdo, INT $id): ARRAY {
+  $query = $pdo->prepare('SELECT * FROM poll_item WHERE poll_id = :id ORDER BY name ASC');
+  $query->bindValue(':id', $id, PDO::PARAM_INT);
+  $query->execute();
+
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function addVote(PDO $pdo, INT $user_id, ARRAY $items) {
+  $query = $pdo->prepare('INSERT INTO user_poll_item (user_id, poll_item_id) VALUES (:user_id, :poll_item_id)');
+  $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+  $res = true;
+  foreach ($items as $key => $itemId) {
+    $query->bindValue(':poll_item_id', (int)$itemId, PDO::PARAM_INT);
+    if (!$query->execute()) {
+      $res = false;
+    }
+  }
+  return $res;
+}
+
+function removeVote(PDO $pdo, INT $poll_id, INT $user_id) {
+  $query = $pdo->prepare('DELETE upi
+                          FROM user_poll_item AS upi
+                          JOIN poll_item AS pi ON pi.id = upi.poll_item_id
+                          WHERE pi.poll_id = :poll_id AND upi.user_id = :user_id');
+  $query->bindValue(':poll_id', $poll_id, PDO::PARAM_INT);
+  $query->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+  return $query->execute();
+}
