@@ -5,6 +5,9 @@ require_once 'lib/poll.php';
 
 $error404 = false;
 
+$messages = [];
+$errors = [];
+
 if (isset($_GET['id'])) {
   $id = (int)$_GET['id'];
   $poll = getPoll($pdo, $id);
@@ -15,9 +18,18 @@ if (isset($_GET['id'])) {
     $pageTitle = $poll['title'];
     
     if (isset($_SESSION['user']) && isset($_POST['voteSubmit'])) {
-      removeVote($pdo, $id, (int)$_SESSION['user']['id']);
-      $res = addVote($pdo, (int)$_SESSION['user']['id'], $_POST['items']);
-    } 
+      if (empty($_POST['items'])) {
+        $errors[] = 'Vous devez sélectionner au moins un élément';
+      } else {
+        removeVote($pdo, $id, (int)$_SESSION['user']['id']);
+        $resAddVote = addVote($pdo, (int)$_SESSION['user']['id'], $_POST['items']);
+        if ($resAddVote) {
+          $messages[] = 'Votre vote a bien été pris en compte';
+        } else {
+          $errors[] = 'Une erreur est survenue lors de l\'enregistrement de votre vote';
+        }
+      }
+    }
 
     $pollResults = getPollResults($pdo, $id);
     $totalUsers = getPollTotalUsers($pdo, $id);
@@ -66,6 +78,20 @@ if (!$error404) {
               <label class="btn btn-outline-primary" for="btncheck<?=$item['id']?>"><?=$item['name']?></label>
             <?php } ?>
             </div>
+            <?php if ($messages) { ?>
+              <?php foreach($messages as $message) { ?>
+                <div class="alert alert-success mt-3" role="alert">
+                  <?=$message?>
+                </div>
+              <?php } ?>
+            <?php } ?>
+            <?php if ($errors) { ?>
+              <?php foreach($errors as $error) { ?>
+                <div class="alert alert-danger mt-3" role="alert">
+                  <?=$error?>
+                </div>
+              <?php } ?>
+            <?php } ?>
             <div class="mt-2">
               <input type="submit" name="voteSubmit" class="btn btn-primary" value="Voter">
             </div>
